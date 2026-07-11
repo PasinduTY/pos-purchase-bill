@@ -1,0 +1,43 @@
+## .NET / Visual Studio ##
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.userosscache
+*.sln.docstates
+
+## Build results ##
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]uild/
+
+## Rider / VS Code ##
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+## Angular / Node ##
+node_modules/
+dist/
+.angular/cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+## Environment / secrets ##
+appsettings.Development.json
+*.env
+.env
+
+## OS files ##
+.DS_Store
+Thumbs.db
+
+## Logs ##
+*.log
