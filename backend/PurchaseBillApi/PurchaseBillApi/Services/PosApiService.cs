@@ -1,5 +1,6 @@
 ﻿using PurchaseBillApi.DTOs;
 using System.Text.Json;
+using System.Net.Http.Headers;
 
 namespace PurchaseBillApi.Services
 {
@@ -30,14 +31,21 @@ namespace PurchaseBillApi.Services
                 }
             };
 
+            // NOTE: We build the request content manually (instead of PostAsJsonAsync)
+            // because this external API rejects requests where Content-Type includes
+            // "charset=utf-8" (which PostAsJsonAsync adds by default), returning a
+            // generic "Invalid Login Details" instead of a parsing error.
+            var json = JsonSerializer.Serialize(posRequest);
+            var httpContent = new StringContent(json);
+            httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+
             HttpResponseMessage response;
             try
             {
-                response = await _httpClient.PostAsJsonAsync(baseUrl, posRequest);
+                response = await _httpClient.PostAsync(baseUrl, httpContent);
             }
-            catch (HttpRequestException ex)
+            catch (HttpRequestException)
             {
-                // Network-level failure (POS API unreachable, DNS failure, etc.)
                 return new LoginResultDto
                 {
                     Success = false,
