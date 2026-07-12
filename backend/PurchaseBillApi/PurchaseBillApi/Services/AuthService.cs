@@ -9,11 +9,13 @@ namespace PurchaseBillApi.Services
     {
         private readonly IPosApiService _posApiService;
         private readonly AppDbContext _dbContext;
+        private readonly ITokenService _tokenService;
 
-        public AuthService(IPosApiService posApiService, AppDbContext dbContext)
+        public AuthService(IPosApiService posApiService, AppDbContext dbContext, ITokenService tokenService)
         {
             _posApiService = posApiService;
             _dbContext = dbContext;
+            _tokenService = tokenService;
         }
 
         public async Task<LoginResultDto> LoginAsync(LoginRequestDto request)
@@ -26,6 +28,8 @@ namespace PurchaseBillApi.Services
             }
 
             await SaveLocationsAsync(result.Locations);
+
+            result.Token = _tokenService.GenerateToken(request.Email);
 
             return result;
         }
