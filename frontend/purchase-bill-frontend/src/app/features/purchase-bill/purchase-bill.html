@@ -1,4 +1,64 @@
-<div style="padding: 2rem">
+<div class="purchase-bill-container">
   <h1>Purchase Bill</h1>
-  <p>You are logged in. This is a placeholder — the real form comes next.</p>
+
+  <div class="loading" *ngIf="isLoadingLocations">Loading locations...</div>
+  <div class="error" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <form [formGroup]="itemForm" class="item-form">
+    <div class="form-field">
+      <label>Item*</label>
+      <input
+        type="text"
+        formControlName="item"
+        list="item-options"
+        placeholder="Type or select an item"
+      />
+      <datalist id="item-options">
+        <option *ngFor="let option of itemOptions" [value]="option"></option>
+      </datalist>
+    </div>
+
+    <div class="form-field">
+      <label>Batch*</label>
+      <select formControlName="batch">
+        <option value="" disabled selected>Select batch</option>
+        <option *ngFor="let loc of locations" [value]="loc">{{ loc }}</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label>Standard Cost</label>
+      <input type="number" formControlName="standardCost" step="0.01" />
+    </div>
+
+    <div class="form-field">
+      <label>Standard Price</label>
+      <input type="number" formControlName="standardPrice" step="0.01" />
+    </div>
+
+    <div class="form-field">
+      <label>Qty</label>
+      <input type="number" formControlName="quantity" />
+    </div>
+
+    <div class="form-field">
+      <label>Free Qty</label>
+      <input type="number" formControlName="freeQty" />
+    </div>
+
+    <div class="form-field">
+      <label>Discount %</label>
+      <input type="number" formControlName="discount" step="0.01" />
+    </div>
+
+    <div class="form-field readonly">
+      <label>Total Cost</label>
+      <span>{{ totalCost.toFixed(2) }}</span>
+    </div>
+
+    <div class="form-field readonly">
+      <label>Total Selling</label>
+      <span>{{ totalSelling.toFixed(2) }}</span>
+    </div>
+  </form>
 </div>
