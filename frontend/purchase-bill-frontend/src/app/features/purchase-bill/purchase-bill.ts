@@ -15,6 +15,10 @@ export class PurchaseBill implements OnInit {
   locations: string[] = [];
   itemOptions: string[] = ['Mango', 'Apple', 'Banana', 'Orange', 'Grapes', 'Kiwi', 'Strawberry'];
 
+  submitMessage: string | null = null;
+  submitSuccess = false;
+  isSubmitting = false;
+
   addedItems: PurchaseBillItem[] = [];
 
   isLoadingLocations = false;
@@ -106,5 +110,34 @@ export class PurchaseBill implements OnInit {
 
   removeItem(index: number): void {
     this.addedItems.splice(index, 1);
+  }
+
+  onSubmitBill(): void {
+    if (this.addedItems.length === 0) {
+      this.submitMessage = 'Add at least one item before submitting.';
+      this.submitSuccess = false;
+      return;
+    }
+
+    this.isSubmitting = true;
+    this.submitMessage = null;
+
+    this.purchaseBillService.submit({ items: this.addedItems }).subscribe({
+      next: (result) => {
+        this.isSubmitting = false;
+        this.submitSuccess = result.success;
+        this.submitMessage = result.message;
+
+        if (result.success) {
+          this.addedItems = [];
+        }
+      },
+      error: (err) => {
+        this.isSubmitting = false;
+        this.submitSuccess = false;
+        this.submitMessage = 'Failed to submit purchase bill. Please try again.';
+        console.error(err);
+      },
+    });
   }
 }

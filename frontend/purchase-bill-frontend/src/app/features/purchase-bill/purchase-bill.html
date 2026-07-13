@@ -100,4 +100,19 @@
     <p>Total Items: {{ totalItemsCount }}</p>
     <p>Total Quantity: {{ totalQuantitySum }}</p>
   </div>
+
+  <div class="submit-section" *ngIf="addedItems.length > 0">
+    <button type="button" (click)="onSubmitBill()" [disabled]="isSubmitting">
+      {{ isSubmitting ? 'Submitting...' : 'Submit Purchase Bill' }}
+    </button>
+  </div>
+
+  <div
+    class="submit-message"
+    *ngIf="submitMessage"
+    [class.success]="submitSuccess"
+    [class.error]="!submitSuccess"
+  >
+    {{ submitMessage }}
+  </div>
 </div>

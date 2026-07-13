@@ -1,0 +1,6 @@
+.submit-message.success {
+  color: green;
+}
+.submit-message.error {
+  color: red;
+}
