@@ -1,0 +1,90 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f6fa;
+  padding: 1rem;
+}
+
+.login-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.login-card h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin: 0 0 1.5rem 0;
+}
+
+.form-field {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid #d9dce1;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  transition: border-color 0.15s ease;
+}
+
+.form-field:focus-within {
+  border-color: #5b7cfa;
+}
+
+.form-field .icon {
+  color: #9aa1ac;
+  font-size: 1rem;
+}
+
+.form-field input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.field-error {
+  color: #d64545;
+  font-size: 0.8rem;
+  margin: 0.25rem 0 0.75rem 0.25rem;
+}
+
+.server-error {
+  color: #d64545;
+  font-size: 0.85rem;
+  background: #fdeeee;
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.75rem 0;
+}
+
+button[type='submit'] {
+  width: 100%;
+  padding: 0.85rem;
+  margin-top: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #6a8dfa, #4a63e0);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+button[type='submit']:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+button[type='submit']:hover:not(:disabled) {
+  opacity: 0.92;
+}
