@@ -62,4 +62,49 @@ export class PurchaseBill implements OnInit {
     const qty = this.itemForm.value.quantity || 0;
     return price * qty;
   }
+
+  onAddItem(): void {
+    if (this.itemForm.invalid) {
+      this.itemForm.markAllAsTouched();
+      return;
+    }
+
+    const formValue = this.itemForm.value;
+
+    const newItem: PurchaseBillItem = {
+      item: formValue.item,
+      batch: formValue.batch,
+      standardCost: formValue.standardCost,
+      standardPrice: formValue.standardPrice,
+      quantity: formValue.quantity,
+      freeQty: formValue.freeQty,
+      discount: formValue.discount,
+      totalCost: this.totalCost,
+      totalSelling: this.totalSelling,
+    };
+
+    this.addedItems.push(newItem);
+
+    this.itemForm.reset({
+      item: '',
+      batch: '',
+      standardCost: 0,
+      standardPrice: 0,
+      quantity: 0,
+      freeQty: 0,
+      discount: 0,
+    });
+  }
+
+  get totalItemsCount(): number {
+    return this.addedItems.length;
+  }
+
+  get totalQuantitySum(): number {
+    return this.addedItems.reduce((sum, item) => sum + item.quantity, 0);
+  }
+
+  removeItem(index: number): void {
+    this.addedItems.splice(index, 1);
+  }
 }

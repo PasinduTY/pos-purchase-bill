@@ -61,4 +61,43 @@
       <span>{{ totalSelling.toFixed(2) }}</span>
     </div>
   </form>
+
+  <button type="button" class="add-button" (click)="onAddItem()">Add</button>
+
+  <table class="items-table" *ngIf="addedItems.length > 0">
+    <thead>
+      <tr>
+        <th>Item</th>
+        <th>Batch</th>
+        <th>Standard Cost</th>
+        <th>Standard Price</th>
+        <th>Qty</th>
+        <th>Free Qty</th>
+        <th>Discount</th>
+        <th>Total Cost</th>
+        <th>Total Selling</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of addedItems; let i = index">
+        <td>{{ row.item }}</td>
+        <td>{{ row.batch }}</td>
+        <td>{{ row.standardCost.toFixed(2) }}</td>
+        <td>{{ row.standardPrice.toFixed(2) }}</td>
+        <td>{{ row.quantity }}</td>
+        <td>{{ row.freeQty }}</td>
+        <td>{{ row.discount }}%</td>
+        <td>{{ row.totalCost.toFixed(2) }}</td>
+        <td>{{ row.totalSelling.toFixed(2) }}</td>
+        <td><button type="button" (click)="removeItem(i)">Remove</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="summary" *ngIf="addedItems.length > 0">
+    <h3>Item Summary</h3>
+    <p>Total Items: {{ totalItemsCount }}</p>
+    <p>Total Quantity: {{ totalQuantitySum }}</p>
+  </div>
 </div>
