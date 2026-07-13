@@ -5,12 +5,13 @@ import {
   PurchaseBillSubmitRequest,
   PurchaseBillSubmitResult,
 } from '../models/purchase-bill.models';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PurchaseBillService {
-  private readonly apiUrl = 'https://localhost:7021/api/PurchaseBill';
+  private readonly apiUrl = `${environment.apiUrl}/PurchaseBill`;
 
   constructor(private http: HttpClient) {}
 
